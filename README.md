@@ -1,14 +1,13 @@
-## Getting Started
+# Text RPG in Java
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Try it, you'll see it ;)
+A game can last between 5 and 10 minutes.
+Will you put an end to the reign of the Evil Emperor ?
 
 ## Folder Structure
 
-The workspace contains two folders by default, where:
+The workspace contains the following folders :
 
 - `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-## Dependency Management
-
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+- `dist`: the folder to run class files
+  

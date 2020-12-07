@@ -5,6 +5,12 @@ import java.util.Scanner;
 import com.lpwm.joaquim.roles.Mage;
 import com.lpwm.joaquim.roles.Warrior;
 
+/**
+ * Game
+ * 
+ * The core of the project
+ */
+
 public class Game {
     
     static Scanner scanner = new Scanner(System.in);
@@ -78,6 +84,10 @@ public class Game {
         
         //print first story act intro
         Story.printFirstActIntro();
+
+        clearConsole();
+        Map walk = new Map(15, 1, 14);
+        walk.start("\t\tLeaving the village");
         
         //setting isRunning to true, so the game loop can continue
         isRunning = true;
@@ -241,6 +251,11 @@ public class Game {
     public static void checkAct(){
         //change acts based on xp
         if(player.xp >= 10 && act == 1){
+
+            clearConsole();
+            Map m = new Map(15, 1, 14);
+            m.start("\tCrossing the Frozen Caves");
+
             //increment act and place
             act = 2;
             place = 1;
@@ -264,6 +279,11 @@ public class Game {
             encounters[4] = "Merchant";
 
         }else if(player.xp >= 50 && act == 2){
+
+            clearConsole();
+            Map walk = new Map(15, 1, 14);
+            walk.start("\t\tThe Last Bastion");
+
             //increment act and place
             act = 3;
             place = 2;

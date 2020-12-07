@@ -228,7 +228,7 @@ public class Story {
 		System.out.println("It was in fact... NO! THAT'S NOT POSSIBLE! THIS IS A MYTH!!!");
 		System.out.println("You feel the darkness around you.");
 		System.out.println("The one we thought was extinct for millennia is back.");
-		System.out.println("GOTHMOD THE LORD OF DARKNESS sprang from the bowels of the underworld and stands in front of us !");
+		System.out.println("GOTHMOG THE LORD OF DARKNESS sprang from the bowels of the underworld and stands in front of us !");
 		System.out.println("Praying is the only thing we can do...");
 		Game.anythingToContinue();
 	}
