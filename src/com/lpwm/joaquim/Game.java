@@ -14,7 +14,7 @@ public class Game {
     public static boolean isRunning;
     
     //random encounters
-    public static String[] encounters = {"Battle", "Battle", "Battle", "Battle", "Rest"}; // values in Act I.
+    public static String[] encounters = {"Battle", "Battle", "Battle", "Battle", "Battle"}; // values in Act I.
     
     //enemy names
     public static String[] enemies = {"Ogre", "Ogre", "Goblin", "Goblin", "Stone Elemental"}; // values in Act I.
@@ -22,6 +22,7 @@ public class Game {
     //Story elements
     public static int place = 0, act = 1;
     public static boolean escape_possible = true, shop_open = true;
+    private static Shop shop;
     public static String[] places = {"Everlasting Mountains", "Haunted Lands", "Castle of the Evil Emperor", "Throne Room"};
 
     /**
@@ -43,7 +44,7 @@ public class Game {
         System.out.println(" /  `-.__ ^   / .-'.--\\ =-=~_=-=~=^/  _ `--./ .-'  `-");
         System.out.println("/        `.  / /       `.~-^=-=~=^=.-'      '-._ `._");
         printSeperator(55);
-        System.out.println("                 AGE OF THE EVIL EMPEROR");
+        System.out.println("                RISE OF THE EVIL EMPEROR");
         System.out.println("              TEXT RPG BY JOAQUIM DIMITROV");
         printSeperator(55);
         anythingToContinue();
@@ -70,7 +71,7 @@ public class Game {
         Player.selectRole();
 
         //create new player object with the name
-        if(Player.playerRole == "mage")
+        if(Player.playerRole.equalsIgnoreCase("mage"))
             player = new Mage(name);
         else
             player = new Warrior(name);
@@ -90,51 +91,51 @@ public class Game {
      * Scanner & Print methods
      */
     
-    //method to get user input from console
-    public static int readInt(String prompt, int userChoices){
-        int input;
+        //method to get user input from console
+        public static int readInt(String prompt, int userChoices){
+            int input;
+            
+            do{
+                System.out.println(prompt);
+                try{
+                    input = Integer.parseInt(scanner.next());
+                }catch(Exception e){
+                    input = -1;
+                    System.out.println("Please enter an integer!");
+                }
+            }while(input < 1 || input > userChoices);
+            return input;
+        }
         
-        do{
-            System.out.println(prompt);
-            try{
-                input = Integer.parseInt(scanner.next());
-            }catch(Exception e){
-                input = -1;
-                System.out.println("Please enter an integer!");
-            }
-        }while(input < 1 || input > userChoices);
-        return input;
-    }
-    
-    //method to simulate clearing out the console
-    public static void clearConsole(){
-        for(int i = 0; i < 100; i++)
+        //method to simulate clearing out the console
+        public static void clearConsole(){
+            for(int i = 0; i < 100; i++)
+                System.out.println();
+        }
+        
+        //method to print a seperator with length n
+        public static void printSeperator(int n){
+            for(int i = 0; i < n; i++)
+                System.out.print("-");
             System.out.println();
-    }
-    
-    //method to print a seperator with length n
-    public static void printSeperator(int n){
-        for(int i = 0; i < n; i++)
-            System.out.print("-");
-        System.out.println();
-    }
-    
-    //method to print a heading
-    public static void printHeading(String title){
-        printSeperator(30);
-        System.out.println(title);
-        printSeperator(30);
-    }
-    
-    //method to stop the game until user enters anything
-    public static void anythingToContinue(){
-        System.out.println("\nEnter anything to continue...");
-        scanner.next();
-    }
+        }
+        
+        //method to print a heading
+        public static void printHeading(String title){
+            printSeperator(30);
+            System.out.println(title);
+            printSeperator(30);
+        }
+        
+        //method to stop the game until user enters anything
+        public static void anythingToContinue(){
+            System.out.println("\nEnter anything to continue...");
+            scanner.next();
+        }
 
 
     /**
-     * Main methods (menu choices)
+     * Menu choices methods
      */
     
     //main game loop
@@ -147,8 +148,10 @@ public class Game {
                     continueJourney();
                 else if(input == 2)
                     characterInfo();
-                else if(input == 3)
-                    shop();
+                else if(input == 3) {
+                    shop = new Shop(); //new instance to avoid the increment of shop items each time (avoiding static)
+                    shop.enter();
+                }
                 else {
                     System.out.println("\033[0;31mGAME OVER\033[0m");
                     isRunning = false;
@@ -177,7 +180,7 @@ public class Game {
         System.out.println("(1) Continue on your journey");
         System.out.println("(2) Character Info");
         if(shop_open == true){
-            System.out.println("(3) Shop (keep your money for potions you'll need it lol)");
+            System.out.println("(3) Shop");
             System.out.println("(4) Exit Game");
         }
         else {
@@ -205,12 +208,18 @@ public class Game {
         }
         if(player.numDefUpgrades > 0){
             System.out.println("Defensive trait: " + player.defUpgrades[player.numDefUpgrades - 1]);
+            printSeperator(20);
+        }
+
+        //printing the inventory (weapons)
+        if(player.weapons.size() > 0){
+            String weaponsList = "";
+            for(Weapon weapon : player.weapons){
+                weaponsList += weapon.name;
+            }
+            System.out.println("Weapons: " + weaponsList + " (bonus: "+player.weapons.get(0).bonus+")");
         }
         
-        anythingToContinue();
-    }
-
-    public static void shop(){
         anythingToContinue();
     }
 
@@ -218,15 +227,14 @@ public class Game {
     public static void continueJourney(){
         //check if act must be increased
         checkAct();
-        //check if game isn't in last act
+        //check if game isn't in "last" act (Act IV)
         if(act != 4)
-            System.out.println("afficher map");
             randomEncounter();
     }
 
 
     /**
-     * In game methods
+     * In-game methods
      */
     
     //method that changes the game's values based on player xp
@@ -321,14 +329,14 @@ public class Game {
         System.out.println("- Magic Potion: " + price + " gold.");
         printSeperator(20);
         //ask the player to buy one
-        System.out.println("Do you want to buy one?\n(1) Yes!\n(2) No thanks.");
+        System.out.println("Do you want to buy one? ("+player.gold+" © left)\n(1) Yes!\n(2) No thanks.");
         int input = readInt("-> ", 2);
         //check if player wants to buy
         if(input == 1){
             clearConsole();
             //check if player has enough gold
             if(player.gold >= price){
-                printHeading("You bought a magical potion for " + price + "gold.");
+                printHeading("You bought a magical potion for " + price + " gold.");
                 player.pots++;
                 player.gold -= price;
             }else
@@ -404,7 +412,7 @@ public class Game {
                 }
                 if(dmg < 0)
                     dmg = 0;
-                //deal damge to both parties
+                //deal damage to both parties
                 player.hp -= dmgTook;
                 enemy.hp -= dmg;
                 //print the info of this battle round
@@ -427,7 +435,7 @@ public class Game {
                     player.xp += enemy.xp;
                     System.out.println("You earned "+ enemy.xp + " XP!");
                     //random drops
-                    boolean addRest = (Math.random()*5 + 1 <= 4.25);
+                    boolean addRest = (Math.random()*5 + 1 >= 4.25);
                     int goldEarned = (int) (Math.random()*enemy.xp+1);
                     if(addRest){
                         player.restsLeft++;
@@ -492,11 +500,10 @@ public class Game {
     }
     
     
-    
     //the big fight against the Evil Emperor
     public static void finalBattle(){
         //creating the evil emperor and letting the player fight against him
-        battle(new Enemy("THE EVIL EMPEROR", 200));
+        battle(new Enemy("THE EVIL EMPEROR", 210));
         
         //story
         Story.printFourthActOutro();
@@ -513,14 +520,16 @@ public class Game {
         //printing the proper ending
         Story.printEnd(player);
         isRunning = false;
+        System.exit(0);
     }
 
     //final battle against the true ennemy (last of the entire game)
     public static void trueEnemyBattle(){
         //creating the Lord of Darkness and letting the player fight against him
         escape_possible = false;
-        battle(new Enemy("THE LORD OF DARKNESS", 250));
+        battle(new Enemy("THE LORD OF DARKNESS", 280));
     }
+
 
 
     
@@ -533,7 +542,6 @@ public class Game {
         isRunning = false;
         System.exit(0);
     }
-    
     
     
 }

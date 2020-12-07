@@ -1,5 +1,10 @@
 package com.lpwm.joaquim.weapons;
 
-public class SharpShield {
+import com.lpwm.joaquim.Weapon;
+
+public final class SharpShield extends Weapon {
     
+    public SharpShield() {
+        super("Sharp Shield", 15, 3);
+    }
 }

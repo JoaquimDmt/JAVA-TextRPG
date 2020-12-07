@@ -1,5 +1,7 @@
 package com.lpwm.joaquim;
 
+import java.util.ArrayList;
+
 public class Player extends Character{
 	
 	//player class
@@ -16,6 +18,9 @@ public class Player extends Character{
 	public String[] atkUpgrades = { "Strength", "Power", "Might", "Godlike Strength" };
 	public String[] defUpgrades = { "Heavy Bones", "Stoneskin", "Scale Armor", "Holy Aura" };
 
+	// Array to store purchased weapons
+	public ArrayList<Weapon> weapons = new ArrayList<>();
+
 	// Player specific constructor
 	public Player(String name, String type) {
 		// calling constructor of superclass
@@ -27,7 +32,7 @@ public class Player extends Character{
 		this.numDefUpgrades = 0;
 		// set additional stats
 		this.gold = 5;
-		this.restsLeft = 1;
+		this.restsLeft = 0;
 		this.pots = 0;
 		// let the player choose a trait when creating a new character
 		chooseTrait();
@@ -56,12 +61,23 @@ public class Player extends Character{
 	//Player specific methods (more in the next part)
 	@Override
 	public int attack() {
-		return (int) (Math.random()*(xp/4 + numAtkUpgrades*3 + 3) + xp/10 + numAtkUpgrades*2 + numDefUpgrades + 1);
+		if (!weapons.isEmpty()) {
+			System.out.println(weapons.get(0).name);
+			return (int) (Math.random()*(xp/4 + numAtkUpgrades*3 + 3) + xp/10 + numAtkUpgrades*2 + numDefUpgrades + 1 + (weapons.get(0).bonus/2));
+		}
+		else {
+			return (int) (Math.random()*(xp/4 + numAtkUpgrades*3 + 3) + xp/10 + numAtkUpgrades*2 + numDefUpgrades + 1);
+		}
 	}
 
 	@Override
 	public int defend() {
-		return (int) (Math.random()*(xp/4 + numDefUpgrades*3 + 3) + xp/10 + numDefUpgrades*2 + numAtkUpgrades + 1);
+		if (!weapons.isEmpty()) {
+			return (int) (Math.random()*(xp/4 + numAtkUpgrades*3 + 3) + xp/10 + numAtkUpgrades*2 + numDefUpgrades + 1 + (weapons.get(0).bonus/2));
+		}
+		else {
+			return (int) (Math.random()*(xp/4 + numAtkUpgrades*3 + 3) + xp/10 + numAtkUpgrades*2 + numDefUpgrades + 1);
+		}
 	}
 	
 	//let the player choose a trait of either skill path
@@ -85,5 +101,12 @@ public class Player extends Character{
 			numDefUpgrades++;
 		}
 		Game.anythingToContinue();
+	}
+
+	//method to add the purchased weapons in the player inventory
+	public void getNewWeapon(Weapon newWeapon) {
+		weapons.clear(); //Temporary clearing weapons list to only have one weapon at a time //Todo: Allow to keep several weapons and switch from one to another
+		weapons.add(newWeapon);
+		System.out.println(newWeapon.name+" has been added to your inventory !");
 	}
 }

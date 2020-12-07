@@ -1,5 +1,10 @@
 package com.lpwm.joaquim.weapons;
 
-public class ElderWand {
-    
+import com.lpwm.joaquim.Weapon;
+
+public final class ElderWand  extends Weapon {
+
+    public ElderWand() {
+        super("Elder Wand", 23, 5);
+    }
 }

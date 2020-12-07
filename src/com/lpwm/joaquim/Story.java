@@ -20,7 +20,7 @@ public class Story {
 		Game.printSeperator(30);
 		System.out.println("ACT I - INTRO");
 		Game.printSeperator(30);
-		System.out.println("As you begin your journey you start travelling trough the nearby woods to reach the everlasting mountains.");
+		System.out.println("As you begin your journey, you start travelling trough the nearby woods to reach the everlasting mountains.");
 		System.out.println("The everlasting mountains are a very dangerous place. It says nobody came back alive from there.");
 		System.out.println("\nAfter a long day of walking through the woods, you finally reach the everlasting mountains.");
 		System.out.println("You don't care about the things you've heard about this dangerous place and start your journey to defeat the evil emperor.");
@@ -43,10 +43,10 @@ public class Story {
 		Game.printSeperator(30);
 		System.out.println("ACT II - INTRO");
 		Game.printSeperator(30);
-		System.out.println("You begin travelling across the landlines of this once well populated countryside.");
+		System.out.println("You begin travelling across a lifeless desertic land of this once well populated countryside.");
 		System.out.println("You collected some gold from the monsters you killed along the way.");
-		System.out.println("Luckily you know that every once in a while a travelling trader comes across these landlines.");
-		System.out.println("You know exactly where the castle of the evil emperor is, but you have to cross these haunted landlines first...");
+		System.out.println("Luckily you know that every once in a while a travelling trader comes across these lands.");
+		System.out.println("You know exactly where the castle of the evil emperor is, but you have to cross this cursed territory first...");
 		Game.anythingToContinue();
 	}
 	
@@ -55,9 +55,9 @@ public class Story {
 		Game.printSeperator(30);
 		System.out.println("ACT II - OUTRO");
 		Game.printSeperator(30);
-		System.out.println("You managed to cross these haunted landlines and you're still alive!");
+		System.out.println("You managed to cross these haunted lands without being spotted by the Emperor's Henchmen!");
 		System.out.println("You are just a few hours away from your final destination; the castle of the Evil Emperor!");
-		System.out.println("You know that you probably can't rest there, so you make a last break to restore some health.");
+		System.out.println("You know that you probably can't rest there, so you make a last break before the serious things begin.");
 		System.out.println("\nAfter all you've seen you feel empowered to learn another trait.");
 		Game.anythingToContinue();
 	}
@@ -99,7 +99,7 @@ public class Story {
 		System.out.println("You see the huge black castle in front of you.");
 		System.out.println("As you stand in front of the gates, you know there's no going back.");
 		System.out.println("You're disguised as a mercenary and enter the castle. You don't know how much time you have left before someone discovers you!");
-		System.out.println("All you can do know is fight for your life and pray to come out as the winner...");
+		System.out.println("A discreet entrance seems to be on the left...");
 		Game.anythingToContinue();
 	}
 	
@@ -111,8 +111,8 @@ public class Story {
 		Game.printSeperator(30);
 		System.out.println("You came so far. You defeated all of the Evil Emperor's minions.");
 		System.out.println("As you stand in front of the door to his throne room, you know there's no going back.");
-		System.out.println("You recall your lost power and restore your health.");
-		System.out.println("You get the chance to learn a last trait before entering the throne room.");
+		System.out.println("You get the chance to learn a last trait before entering the throne room and restore your health.");
+		System.out.println("A heavy silence reigns...");
 		Game.anythingToContinue();
 	}
 	
@@ -153,9 +153,9 @@ public class Story {
 		System.out.println("ACT IV - INTRO");
 		Game.printSeperator(30);
 		System.out.println("You enter the throne room of the Evil Emperor.");
-		System.out.println("You stares you dead in the eyes. You feel the darkness around you.");
+		System.out.println("He stares you dead in the eyes. But he is not alone... a jet of flame sets the room ablaze! He rides a dragon.");
 		System.out.println("He takes out the holy sword of darkness, the mightiest weapon known to man.");
-		System.out.println("All you can do know is fight for your life and pray to come out as the winner...");
+		System.out.println("All you can do is fighting for your life and pray to come out as the winner...");
 		Game.anythingToContinue();
 	}
 
@@ -166,9 +166,11 @@ public class Story {
 		System.out.println("ACT IV - OUTRO");
 		Game.printSeperator(30);
 		System.out.println("You defeated of the Evil Emperor.");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("AN ENEMY CAN HIDE ANOTHER");
+		System.out.println("But when you thought you had finally conquered the evil that reigned...");
+		System.out.println("A huge noise is heard, the temperature rises, and the light disappears.");
+		System.out.println("\nIn his last entrenchments, the Emperor pronounces something in an ancient language.");
+		System.out.println("What the hell is happening?!");
+		System.out.println("*huge earthquake*");
 		Game.anythingToContinue();
 	}
 
@@ -222,17 +224,20 @@ public class Story {
 		Game.printSeperator(30);
 		System.out.println("FINAL FIGHT - THE TRUE ENEMY");
 		Game.printSeperator(30);
-		System.out.println("");
-		System.out.println("You stares you dead in the eyes. You feel the darkness around you.");
-		System.out.println("");
-		System.out.println("All you can do now is fighting for your life and pray...");
+		System.out.println("An enemy can hide an other ! As we all thought that the evil that reigned here was the Emperor...");
+		System.out.println("It was in fact... NO! THAT'S NOT POSSIBLE! THIS IS A MYTH!!!");
+		System.out.println("You feel the darkness around you.");
+		System.out.println("The one we thought was extinct for millennia is back.");
+		System.out.println("GOTHMOD THE LORD OF DARKNESS sprang from the bowels of the underworld and stands in front of us !");
+		System.out.println("Praying is the only thing we can do...");
 		Game.anythingToContinue();
 	}
 	
 	public static void printEnd(Player player){
 		Game.clearConsole();
 		Game.printSeperator(30);
-		System.out.println("Congratulations, " + player.name + "! You put back the lord in hell incredible !");
+		System.out.println("Congratulations " + player.name + " ! INCREDIBLE You puted back the Lord of Darkness in hell !");
+		System.out.println("You have become a true hero whose praises will be sung forever !");
 		System.out.println(" _______  _______    _ ");
 		System.out.println("(  ____ \\(  ____ \\  ( )");
 		System.out.println("| (    \\/| (    \\/  | |");
