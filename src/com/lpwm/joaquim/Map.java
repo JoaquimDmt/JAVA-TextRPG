@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Map {
 
     public int size, x , y;
+    public String direction;
     public boolean generated = false;
     public static boolean lost = true;
     static Scanner scanner = new Scanner(System.in);
@@ -19,7 +20,7 @@ public class Map {
     ArrayList<Obstacle> obstacles = new ArrayList<>();
 
     public Map(int size, int x, int y) {
-        this.size = size; //number of ligns & number of columns*2
+        this.size = size; //number of ligns & columns
         this.x = x;
         this.y = y;
     }
@@ -40,6 +41,7 @@ public class Map {
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             m.finishPoint();
         }
+        lost=true; //reseting lost value to true for the next map
     }
 
 	public void showMap(String scenario) {
@@ -68,7 +70,7 @@ public class Map {
                     else if (generated == true){
                         if (i== 0 && j == 43)
                             System.out.print("░");
-                        else if (obstacles.get(j).x == j && obstacles.get(j).y == i) //!
+                        else if (equivObstaclePosition(j,i)) //!
                             System.out.print("■");
                         else
                             System.out.print(" ");
@@ -84,26 +86,62 @@ public class Map {
         Game.printSeperator(48);
 	}
 	
-	public void moveUp(int step) {
-		if(this.y>1){ 
+	private boolean equivObstaclePosition(int j, int i) {
+        for (Obstacle obstacle : obstacles){
+            if (j == obstacle.x && i == obstacle.y)
+                return true;
+        }
+        return false;
+    }
+
+    private boolean hitObstacle(int j, int i) {
+        switch (direction) {
+            case "top":
+                if (equivObstaclePosition(j, this.y+2))
+                    return true;
+                break;
+            case "left":
+                if (equivObstaclePosition(this.x-3, i))
+                    return true;
+                break;
+            case "bottom":
+                if (equivObstaclePosition(j, this.y-2))
+                    return true;
+                break;
+            case "right":
+                if (equivObstaclePosition(this.x+3, i))
+                    return true;
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
+
+    public void moveUp(int step) {
+        direction = "top";
+		if(this.y>1 && !hitObstacle(this.x, this.y)){ 
 			this.y-=step;
 		}
 	}
-	
-	public void moveLeft(int step) {
-		if(this.x>1){ 
+
+    public void moveLeft(int step) {
+        direction = "left";
+		if(this.x>1 && !hitObstacle(this.x, this.y)){ 
 			this.x-=step;
 		}
 	}
 	
 	public void moveDown(int step) {
-		if(this.y<14){ 
+        direction = "top";
+		if(this.y<14 && !hitObstacle(this.x, this.y)){ 
 			this.y+=step;
 		}
     }
     
     public void moveRight(int step) {
-		if(this.x<42){ 
+        direction = "right";
+		if(this.x<42 && !hitObstacle(this.x, this.y)){ 
 			this.x+=step;
 		}
     }

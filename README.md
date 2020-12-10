@@ -1,8 +1,8 @@
 # Text RPG in Java
 
-Try it, you'll see it ;)
-A game can last between 5 and 10 minutes.
-Will you put an end to the reign of the Evil Emperor ?
+Try it, you'll see it ;)  
+A game can last between 5 and 10 minutes.  
+Will you put an end to the reign of the Evil Emperor ?  
 
 ## Folder Structure
 
